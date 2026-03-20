@@ -1,52 +1,36 @@
-/**
- * Nomos ASCII Logo
- * Geometric N symbol inspired by symbol.svg
- */
+const PURPLE = "\x1b[38;5;99m";
+const GREEN = "\x1b[38;5;34m";
+const RED = "\x1b[38;5;1m";
+const GRAY = "\x1b[38;5;246m";
+const GRAY_BRIGHT = "\x1b[38;5;239m";
+const MUTED = "\x1b[38;5;243m";
+const RESET = "\x1b[0m";
 
-import { colors } from "./theme.js";
-
-/**
- * Returns the full ASCII Nomos N logo
- */
 export function getAsciiLogo(): string {
-  const n = colors.primary;
-  const r = colors.reset;
-  
   return `
-${n}███╗   ███╗${r} ██████╗  ██████╗ ██████╗  ██████╗
-${n}████╗ ████║${r} ██╔════╝ ██╔════╝██╔═══██╗██╔════╝
-${n}██╔████╔██║${r} ██║      ██║     ██║   ██║██║     
-${n}██║╚██╔╝██║${r} ██║██║     ██║   ██║██║     
-${n}██║ ╚═╝ ██║${r} ╚██████╗╚██████╗╚██████╔╝╚██████╗
-${n}╚═╝     ╚═╝${r}  ╚══════╝ ╚══════╝ ╚═════╝  ╚══════╝
+${PURPLE}███╗   ███╗${RESET} ██████╗  ██████╗ ██████╗  ██████╗
+${PURPLE}████╗ ████║${RESET} ██╔════╝ ██╔════╝██╔═══██╗██╔════╝
+${PURPLE}██╔████╔██║${RESET} ██║      ██║     ██║   ██║██║     
+${PURPLE}██║╚██╔╝██║${RESET} ██║      ██║     ██║   ██║██║     
+${PURPLE}██║ ╚═╝ ██║${RESET} ╚██████╗╚██████╗╚██████╔╝╚██████╗
+${PURPLE}╚═╝     ╚═╝${RESET}  ╚══════╝ ╚══════╝ ╚═════╝  ╚══════╝
 
-${n}Nomos SDK + CLI${r}
+${PURPLE}Nomos SDK + CLI${RESET}
 `;
 }
 
-/**
- * Returns a small logo for inline use
- */
 export function getSmallLogo(): string {
-  const n = colors.primary;
-  const r = colors.reset;
-  return `${n}▟▙${r} Nomos`;
+  return `${PURPLE}▟▙${RESET} Nomos`;
 }
 
-/**
- * Returns the logo with version
- */
 export function getFullBanner(version: string): string {
   return `${getAsciiLogo()}
-${colors.muted}Version: ${colors.primary}${version}${colors.reset}
+${MUTED}Version: ${PURPLE}${version}${RESET}
 `;
 }
 
-/**
- * Returns just the wordmark
- */
 export function getWordmark(): string {
-  const n = colors.primary;
-  const r = colors.reset;
-  return `${n}Nomos${r}`;
+  return `${PURPLE}Nomos${RESET}`;
 }
+
+export const ansi = { PURPLE, GREEN, RED, GRAY, GRAY_BRIGHT, MUTED, RESET };

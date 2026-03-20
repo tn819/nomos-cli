@@ -4,9 +4,8 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "n
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
-import { getAsciiLogo } from "./branding/logo.js";
+import { getAsciiLogo, ansi } from "./branding/logo.js";
 import { successBox, errorBox, formatHeader, formatBullet } from "./branding/output.js";
-import { colors } from "./branding/theme.js";
 import { getAvailableVersions, getLatestVersion, getOperations, getVersionDiff, groupOperationsByTag } from "./overview.js";
 import { NomosSDK } from "./sdk.js";
 
@@ -80,8 +79,8 @@ function sdkFromOptions(opts: { baseUrl?: string; version?: string; token?: stri
 }
 
 function printResponse(result: { status: number; data: unknown }): void {
-  const statusColor = result.status >= 400 ? colors.error : colors.success;
-  console.error(`${statusColor}HTTP ${result.status}${colors.reset}`);
+  const statusColor = result.status >= 400 ? ansi.RED : ansi.GREEN;
+  console.error(`${statusColor}HTTP ${result.status}${ansi.RESET}`);
 
   if (Buffer.isBuffer(result.data)) {
     process.stdout.write(result.data);
@@ -98,13 +97,13 @@ function printResponse(result: { status: number; data: unknown }): void {
 
 function printEverything(version = getLatestVersion()): void {
   const grouped = groupOperationsByTag(version);
-  console.log(formatHeader(`Spec Version: ${colors.primary}${version}${colors.reset}`));
-  console.log(`${colors.muted}Total operations: ${getOperations(version).length}${colors.reset}\n`);
+  console.log(formatHeader(`Spec Version: ${ansi.PURPLE}${version}${ansi.RESET}`));
+  console.log(`${ansi.MUTED}Total operations: ${getOperations(version).length}${ansi.RESET}\n`);
 
   for (const [tag, ops] of grouped) {
     console.log(formatHeader(tag));
     for (const op of ops) {
-      console.log(formatBullet(`${colors.gray40}${op.key}${colors.reset} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`));
+      console.log(formatBullet(`${ansi.GRAY}${op.key}${ansi.RESET} ${ansi.MUTED}::${ansi.RESET} ${op.method.toUpperCase()} ${op.path}`));
     }
   }
 
@@ -115,13 +114,13 @@ function printEverything(version = getLatestVersion()): void {
     const diff = getVersionDiff(base, compare);
 
     console.log(formatHeader(`Version Diff: ${base} → ${compare}`));
-    console.log(`${colors.success}Added (${diff.added.length}):${colors.reset}`);
+    console.log(`${ansi.GREEN}Added (${diff.added.length}):${ansi.RESET}`);
     for (const op of diff.added) {
-      console.log(`  ${colors.success}+${colors.reset} ${op.key} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`);
+      console.log(`  ${ansi.GREEN}+${ansi.RESET} ${op.key} ${ansi.MUTED}::${ansi.RESET} ${op.method.toUpperCase()} ${op.path}`);
     }
-    console.log(`\n${colors.error}Removed (${diff.removed.length}):${colors.reset}`);
+    console.log(`\n${ansi.RED}Removed (${diff.removed.length}):${ansi.RESET}`);
     for (const op of diff.removed) {
-      console.log(`  ${colors.error}-${colors.reset} ${op.key} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`);
+      console.log(`  ${ansi.RED}-${ansi.RESET} ${op.key} ${ansi.MUTED}::${ansi.RESET} ${op.method.toUpperCase()} ${op.path}`);
     }
   }
 }
@@ -168,20 +167,20 @@ program
       baseUrl = await askWithDefault(rl, `Base API URL`, baseUrl || stored.baseUrl || "https://api.nomos.energy");
       version = await askWithDefault(rl, `Spec version`, version || stored.version || getLatestVersion());
 
-      console.log(`\n${colors.primary}▸ Step 2/4: Authentication method${colors.reset}`);
-      console.log(`  ${colors.gray40}1.${colors.reset} Bearer token`);
-      console.log(`  ${colors.gray40}2.${colors.reset} OAuth client credentials`);
+      console.log(`\n${ansi.PURPLE}▸ Step 2/4: Authentication method${ansi.RESET}`);
+      console.log(`  ${ansi.GRAY}1.${ansi.RESET} Bearer token`);
+      console.log(`  ${ansi.GRAY}2.${ansi.RESET} OAuth client credentials`);
       const method = await askWithDefault(rl, `Choose method (1 or 2)`, token ? "1" : "2");
 
       if (method === "1") {
-        console.log(`\n${colors.primary}▸ Step 3/4: Bearer token${colors.reset}`);
+        console.log(`\n${ansi.PURPLE}▸ Step 3/4: Bearer token${ansi.RESET}`);
         token = await askWithDefault(rl, `Bearer token`, token || stored.token);
         if (!token) {
           rl.close();
           throw new Error("No token provided");
         }
       } else {
-        console.log(`\n${colors.primary}▸ Step 3/4: OAuth client credentials${colors.reset}`);
+        console.log(`\n${ansi.PURPLE}▸ Step 3/4: OAuth client credentials${ansi.RESET}`);
         clientId = await askWithDefault(rl, `Client ID`, clientId);
         clientSecret = await askWithDefault(rl, `Client Secret`, clientSecret);
         scope = await askWithDefault(rl, `Scope (optional)`, scope);
@@ -191,7 +190,7 @@ program
         }
       }
 
-      console.log(`\n${colors.primary}▸ Step 4/4: Validating and saving...${colors.reset}`);
+      console.log(`\n${ansi.PURPLE}▸ Step 4/4: Validating and saving...${ansi.RESET}`);
       rl.close();
     }
 
@@ -244,8 +243,8 @@ program
     console.log(formatHeader("Available API Versions"));
     for (const version of getAvailableVersions()) {
       const isLatest = version === latest;
-      const marker = isLatest ? ` ${colors.primary}(latest)${colors.reset}` : "";
-      console.log(formatBullet(`${colors.primary}${version}${colors.reset}${marker}`));
+      const marker = isLatest ? ` ${ansi.PURPLE}(latest)${ansi.RESET}` : "";
+      console.log(formatBullet(`${ansi.PURPLE}${version}${ansi.RESET}${marker}`));
     }
   });
 
@@ -280,15 +279,15 @@ program
     const diff = getVersionDiff(base, latest);
 
     console.log(formatHeader(`New Endpoints: ${base} → ${latest}`));
-    console.log(`${colors.muted}Base: ${base}${colors.reset}`);
-    console.log(`${colors.muted}Latest: ${latest}${colors.reset}`);
-    console.log(`\n${colors.success}Added: ${diff.added.length}${colors.reset}`);
+    console.log(`${ansi.MUTED}Base: ${base}${ansi.RESET}`);
+    console.log(`${ansi.MUTED}Latest: ${latest}${ansi.RESET}`);
+    console.log(`\n${ansi.GREEN}Added: ${diff.added.length}${ansi.RESET}`);
     for (const op of diff.added) {
-      console.log(`  ${colors.success}+${colors.reset} ${op.method.toUpperCase()} ${op.path} ${colors.muted}::${colors.reset} ${op.summary}`);
+      console.log(`  ${ansi.GREEN}+${ansi.RESET} ${op.method.toUpperCase()} ${op.path} ${ansi.MUTED}::${ansi.RESET} ${op.summary}`);
     }
-    console.log(`\n${colors.error}Removed: ${diff.removed.length}${colors.reset}`);
+    console.log(`\n${ansi.RED}Removed: ${diff.removed.length}${ansi.RESET}`);
     for (const op of diff.removed) {
-      console.log(`  ${colors.error}-${colors.reset} ${op.method.toUpperCase()} ${op.path} ${colors.muted}::${colors.reset} ${op.summary}`);
+      console.log(`  ${ansi.RED}-${ansi.RESET} ${op.method.toUpperCase()} ${op.path} ${ansi.MUTED}::${ansi.RESET} ${op.summary}`);
     }
   });
 
@@ -301,7 +300,7 @@ program
     const operations = getOperations(opts.version).filter((op) => !opts.tag || op.tags.includes(opts.tag));
     console.log(formatHeader(`Operations (${operations.length})`));
     for (const op of operations) {
-      console.log(formatBullet(`${colors.primary}${op.key}${colors.reset}\t${op.method.toUpperCase()}\t${op.path}`));
+      console.log(formatBullet(`${ansi.PURPLE}${op.key}${ansi.RESET}\t${op.method.toUpperCase()}\t${op.path}`));
     }
   });
 

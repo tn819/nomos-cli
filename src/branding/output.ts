@@ -1,13 +1,7 @@
-/**
- * Styled output utilities for CLI
- */
 import boxen from "boxen";
 import Table from "cli-table3";
-import { colors } from "./theme.js";
+import { ansi } from "./logo.js";
 
-/**
- * Create a success box
- */
 export function successBox(message: string, title?: string): string {
   return boxen(message, {
     padding: 1,
@@ -19,9 +13,6 @@ export function successBox(message: string, title?: string): string {
   });
 }
 
-/**
- * Create an error box
- */
 export function errorBox(message: string, title?: string): string {
   return boxen(message, {
     padding: 1,
@@ -33,9 +24,6 @@ export function errorBox(message: string, title?: string): string {
   });
 }
 
-/**
- * Create an info box
- */
 export function infoBox(message: string, title?: string): string {
   return boxen(message, {
     padding: 1,
@@ -47,9 +35,6 @@ export function infoBox(message: string, title?: string): string {
   });
 }
 
-/**
- * Create a warning box
- */
 export function warningBox(message: string, title?: string): string {
   return boxen(message, {
     padding: 1,
@@ -61,9 +46,6 @@ export function warningBox(message: string, title?: string): string {
   });
 }
 
-/**
- * Create a branded table with Nomos colors
- */
 export function createTable(headers: string[]): Table.Table {
   return new Table({
     head: headers,
@@ -75,24 +57,15 @@ export function createTable(headers: string[]): Table.Table {
   });
 }
 
-/**
- * Format a key-value pair for display
- */
 export function formatKeyValue(key: string, value: string): string {
-  return `${colors.primary}${key}:${colors.reset} ${value}`;
+  return `${ansi.PURPLE}${key}:${ansi.RESET} ${value}`;
 }
 
-/**
- * Format a section header
- */
 export function formatHeader(text: string): string {
-  return `\n${colors.primary}▸${colors.reset} ${colors.gray80}${text}${colors.reset}\n`;
+  return `\n${ansi.PURPLE}▸${ansi.RESET} ${ansi.GRAY_BRIGHT}${text}${ansi.RESET}\n`;
 }
 
-/**
- * Format a list item
- */
 export function formatBullet(text: string, indent = 0): string {
   const spaces = " ".repeat(indent);
-  return `${spaces}${colors.gray40}•${colors.reset} ${text}`;
+  return `${spaces}${ansi.GRAY}•${ansi.RESET} ${text}`;
 }

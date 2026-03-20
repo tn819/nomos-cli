@@ -114,5 +114,5 @@ storybook-static
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Sisyphus drafts
-.sisyphus/drafts/
+# Sisyphus
+.sisyphus/

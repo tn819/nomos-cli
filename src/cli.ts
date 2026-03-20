@@ -4,6 +4,9 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "n
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
+import { getAsciiLogo } from "./branding/logo.js";
+import { successBox, errorBox, formatHeader, formatBullet } from "./branding/output.js";
+import { colors } from "./branding/theme.js";
 import { getAvailableVersions, getLatestVersion, getOperations, getVersionDiff, groupOperationsByTag } from "./overview.js";
 import { NomosSDK } from "./sdk.js";
 
@@ -43,7 +46,7 @@ function writeStoredConfig(config: StoredConfig): void {
   try {
     chmodSync(CONFIG_FILE, 0o600);
   } catch {
-    // best-effort on permission hardening
+    // best-effort
   }
 }
 
@@ -77,7 +80,8 @@ function sdkFromOptions(opts: { baseUrl?: string; version?: string; token?: stri
 }
 
 function printResponse(result: { status: number; data: unknown }): void {
-  console.error(`HTTP ${result.status}`);
+  const statusColor = result.status >= 400 ? colors.error : colors.success;
+  console.error(`${statusColor}HTTP ${result.status}${colors.reset}`);
 
   if (Buffer.isBuffer(result.data)) {
     process.stdout.write(result.data);
@@ -94,13 +98,13 @@ function printResponse(result: { status: number; data: unknown }): void {
 
 function printEverything(version = getLatestVersion()): void {
   const grouped = groupOperationsByTag(version);
-  console.log(`Spec version: ${version}`);
-  console.log(`Total operations: ${getOperations(version).length}`);
+  console.log(formatHeader(`Spec Version: ${colors.primary}${version}${colors.reset}`));
+  console.log(`${colors.muted}Total operations: ${getOperations(version).length}${colors.reset}\n`);
 
   for (const [tag, ops] of grouped) {
-    console.log(`\n[${tag}] (${ops.length})`);
+    console.log(formatHeader(tag));
     for (const op of ops) {
-      console.log(`- ${op.key} :: ${op.method.toUpperCase()} ${op.path} :: ${op.summary}`);
+      console.log(formatBullet(`${colors.gray40}${op.key}${colors.reset} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`));
     }
   }
 
@@ -110,15 +114,14 @@ function printEverything(version = getLatestVersion()): void {
     const compare = versions[versions.length - 1];
     const diff = getVersionDiff(base, compare);
 
-    console.log(`\nVersion diff ${base} -> ${compare}`);
-    console.log(`Added: ${diff.added.length}`);
+    console.log(formatHeader(`Version Diff: ${base} → ${compare}`));
+    console.log(`${colors.success}Added (${diff.added.length}):${colors.reset}`);
     for (const op of diff.added) {
-      console.log(`+ ${op.key} :: ${op.method.toUpperCase()} ${op.path}`);
+      console.log(`  ${colors.success}+${colors.reset} ${op.key} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`);
     }
-
-    console.log(`Removed: ${diff.removed.length}`);
+    console.log(`\n${colors.error}Removed (${diff.removed.length}):${colors.reset}`);
     for (const op of diff.removed) {
-      console.log(`- ${op.key} :: ${op.method.toUpperCase()} ${op.path}`);
+      console.log(`  ${colors.error}-${colors.reset} ${op.key} ${colors.muted}::${colors.reset} ${op.method.toUpperCase()} ${op.path}`);
     }
   }
 }
@@ -126,9 +129,11 @@ function printEverything(version = getLatestVersion()): void {
 const program = new Command();
 program
   .name("nomos")
-  .description("Nomos SDK CLI")
+  .description("Nomos Energy SDK CLI")
   .version("0.1.0")
-  .showHelpAfterError();
+  .showHelpAfterError()
+  .addHelpText("before", "\n" + getAsciiLogo())
+  .addHelpText("after", "\n" + formatBullet("Use 'nomos <command> --help' for more info") + "\n");
 
 program
   .command("help")
@@ -158,35 +163,35 @@ program
 
     if (shouldGuide) {
       const rl = createInterface({ input: process.stdin, output: process.stdout });
-      console.log("Guided login");
-      console.log("Step 1/4: connection defaults");
-      baseUrl = await askWithDefault(rl, "Base API URL", baseUrl || stored.baseUrl || "https://api.nomos.energy");
-      version = await askWithDefault(rl, "Spec version", version || stored.version || getLatestVersion());
+      console.log(formatHeader("Guided Login"));
+      console.log(formatBullet("Step 1/4: Connection defaults"));
+      baseUrl = await askWithDefault(rl, `Base API URL`, baseUrl || stored.baseUrl || "https://api.nomos.energy");
+      version = await askWithDefault(rl, `Spec version`, version || stored.version || getLatestVersion());
 
-      console.log("\nStep 2/4: authentication method");
-      console.log("1) Bearer token");
-      console.log("2) OAuth client credentials");
-      const method = await askWithDefault(rl, "Choose method (1 or 2)", token ? "1" : "2");
+      console.log(`\n${colors.primary}▸ Step 2/4: Authentication method${colors.reset}`);
+      console.log(`  ${colors.gray40}1.${colors.reset} Bearer token`);
+      console.log(`  ${colors.gray40}2.${colors.reset} OAuth client credentials`);
+      const method = await askWithDefault(rl, `Choose method (1 or 2)`, token ? "1" : "2");
 
       if (method === "1") {
-        console.log("\nStep 3/4: bearer token");
-        token = await askWithDefault(rl, "Bearer token", token || stored.token);
+        console.log(`\n${colors.primary}▸ Step 3/4: Bearer token${colors.reset}`);
+        token = await askWithDefault(rl, `Bearer token`, token || stored.token);
         if (!token) {
           rl.close();
           throw new Error("No token provided");
         }
       } else {
-        console.log("\nStep 3/4: OAuth client credentials");
-        clientId = await askWithDefault(rl, "Client ID", clientId);
-        clientSecret = await askWithDefault(rl, "Client Secret", clientSecret);
-        scope = await askWithDefault(rl, "Scope (optional)", scope);
+        console.log(`\n${colors.primary}▸ Step 3/4: OAuth client credentials${colors.reset}`);
+        clientId = await askWithDefault(rl, `Client ID`, clientId);
+        clientSecret = await askWithDefault(rl, `Client Secret`, clientSecret);
+        scope = await askWithDefault(rl, `Scope (optional)`, scope);
         if (!clientId || !clientSecret) {
           rl.close();
           throw new Error("Client ID and Client Secret are required for OAuth client credentials");
         }
       }
 
-      console.log("\nStep 4/4: validating and saving...");
+      console.log(`\n${colors.primary}▸ Step 4/4: Validating and saving...${colors.reset}`);
       rl.close();
     }
 
@@ -224,8 +229,10 @@ program
       version,
     });
 
-    console.log(`Logged in. Config saved to ${CONFIG_FILE}`);
-    console.log("\nDisplaying full capability overview:\n");
+    console.log(successBox(
+      `Config saved to ${CONFIG_FILE}\n\nDisplaying full capability overview:`,
+      "✓ Logged In"
+    ));
     printEverything(version);
   });
 
@@ -234,8 +241,11 @@ program
   .description("List available OpenAPI versions")
   .action(() => {
     const latest = getLatestVersion();
+    console.log(formatHeader("Available API Versions"));
     for (const version of getAvailableVersions()) {
-      console.log(`${version}${version === latest ? " (latest)" : ""}`);
+      const isLatest = version === latest;
+      const marker = isLatest ? ` ${colors.primary}(latest)${colors.reset}` : "";
+      console.log(formatBullet(`${colors.primary}${version}${colors.reset}${marker}`));
     }
   });
 
@@ -269,16 +279,16 @@ program
     const latest = versions[versions.length - 1];
     const diff = getVersionDiff(base, latest);
 
-    console.log(`Base: ${base}`);
-    console.log(`Latest: ${latest}`);
-    console.log(`Added: ${diff.added.length}`);
+    console.log(formatHeader(`New Endpoints: ${base} → ${latest}`));
+    console.log(`${colors.muted}Base: ${base}${colors.reset}`);
+    console.log(`${colors.muted}Latest: ${latest}${colors.reset}`);
+    console.log(`\n${colors.success}Added: ${diff.added.length}${colors.reset}`);
     for (const op of diff.added) {
-      console.log(`+ ${op.method.toUpperCase()} ${op.path} :: ${op.summary}`);
+      console.log(`  ${colors.success}+${colors.reset} ${op.method.toUpperCase()} ${op.path} ${colors.muted}::${colors.reset} ${op.summary}`);
     }
-
-    console.log(`Removed: ${diff.removed.length}`);
+    console.log(`\n${colors.error}Removed: ${diff.removed.length}${colors.reset}`);
     for (const op of diff.removed) {
-      console.log(`- ${op.method.toUpperCase()} ${op.path} :: ${op.summary}`);
+      console.log(`  ${colors.error}-${colors.reset} ${op.method.toUpperCase()} ${op.path} ${colors.muted}::${colors.reset} ${op.summary}`);
     }
   });
 
@@ -289,8 +299,9 @@ program
   .option("--tag <tag>", "Only show operations with this tag")
   .action((opts) => {
     const operations = getOperations(opts.version).filter((op) => !opts.tag || op.tags.includes(opts.tag));
+    console.log(formatHeader(`Operations (${operations.length})`));
     for (const op of operations) {
-      console.log(`${op.key}\t${op.method.toUpperCase()}\t${op.path}\t${op.tags.join(",")}`);
+      console.log(formatBullet(`${colors.primary}${op.key}${colors.reset}\t${op.method.toUpperCase()}\t${op.path}`));
     }
   });
 
@@ -454,12 +465,13 @@ meterOrders
   });
 
 if (process.argv.length <= 2) {
+  console.log(getAsciiLogo());
   program.outputHelp();
   process.exit(0);
 }
 
 program.parseAsync(process.argv).catch((err: unknown) => {
   const msg = err instanceof Error ? err.message : String(err);
-  console.error(msg);
+  console.error(errorBox(msg, "✗ Error"));
   process.exit(1);
 });

@@ -1,0 +1,771 @@
+{
+  "latest": "2026-01-29.edison",
+  "versions": {
+    "2025-12-16.batman": {
+      "source": "openapi.2025-12-16.batman.json",
+      "operations": [
+        {
+          "key": "get-customers",
+          "method": "get",
+          "path": "/customers",
+          "summary": "Get all customers",
+          "tags": [
+            "Customers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-customers-by-id",
+          "method": "get",
+          "path": "/customers/{id}",
+          "summary": "Get a customer",
+          "tags": [
+            "Customers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-events-by-id",
+          "method": "get",
+          "path": "/events/{id}",
+          "summary": "Get an event",
+          "tags": [
+            "Events"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-invoices-by-id",
+          "method": "get",
+          "path": "/invoices/{id}",
+          "summary": "Get an invoice",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-invoices-by-id-file",
+          "method": "get",
+          "path": "/invoices/{id}/file",
+          "summary": "Get an invoice PDF file",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-leads",
+          "method": "get",
+          "path": "/leads",
+          "summary": "Get all leads",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-leads-by-id",
+          "method": "get",
+          "path": "/leads/{id}",
+          "summary": "Get a lead",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-oauth-authorize",
+          "method": "get",
+          "path": "/oauth/authorize",
+          "summary": "Authorize",
+          "tags": [
+            "OAuth"
+          ],
+          "security": [
+            "none"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-plans",
+          "method": "get",
+          "path": "/plans",
+          "summary": "Get all plans",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-plans-by-id",
+          "method": "get",
+          "path": "/plans/{id}",
+          "summary": "Get a plan",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-plans-by-id-quote",
+          "method": "get",
+          "path": "/plans/{id}/quote",
+          "summary": "Get a quote",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions",
+          "method": "get",
+          "path": "/subscriptions",
+          "summary": "Get all subscriptions",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions-by-id",
+          "method": "get",
+          "path": "/subscriptions/{id}",
+          "summary": "Get a subscription",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions-by-id-consumption",
+          "method": "get",
+          "path": "/subscriptions/{id}/consumption",
+          "summary": "Get consumption data",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions-by-id-invoices",
+          "method": "get",
+          "path": "/subscriptions/{id}/invoices",
+          "summary": "Get all invoices for a subscription",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions-by-id-meter-readings",
+          "method": "get",
+          "path": "/subscriptions/{id}/meter_readings",
+          "summary": "Get all meter readings",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-subscriptions-by-id-prices",
+          "method": "get",
+          "path": "/subscriptions/{id}/prices",
+          "summary": "Retrieve Price Time Series",
+          "tags": [
+            "Prices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-suppliers",
+          "method": "get",
+          "path": "/suppliers",
+          "summary": "Get all suppliers",
+          "tags": [
+            "Suppliers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-suppliers-search",
+          "method": "get",
+          "path": "/suppliers/search",
+          "summary": "Search for supplier",
+          "tags": [
+            "Suppliers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "get-well-known-oauth-authorization-server",
+          "method": "get",
+          "path": "/.well-known/oauth-authorization-server",
+          "summary": "OAuth 2.0 Authorization Server Metadata",
+          "tags": [
+            "OAuth",
+            "Discovery"
+          ],
+          "security": [
+            "none"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-admin-magic-link",
+          "method": "post",
+          "path": "/admin/magic_link",
+          "summary": "Get a magic link for the customer portal",
+          "tags": [
+            "Admin"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-leads",
+          "method": "post",
+          "path": "/leads",
+          "summary": "Create a lead",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-load-forecasts",
+          "method": "post",
+          "path": "/load-forecasts",
+          "summary": "Transmit a load forecast",
+          "tags": [
+            "Procurement"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-oauth-token",
+          "method": "post",
+          "path": "/oauth/token",
+          "summary": "Get a token",
+          "tags": [
+            "OAuth"
+          ],
+          "security": [
+            "basic"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-subscriptions",
+          "method": "post",
+          "path": "/subscriptions",
+          "summary": "Create a subscription",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        },
+        {
+          "key": "post-subscriptions-by-id-meter-readings",
+          "method": "post",
+          "path": "/subscriptions/{id}/meter_readings",
+          "summary": "Submit a meter reading",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2025-12-16.batman"
+        }
+      ]
+    },
+    "2026-01-29.edison": {
+      "source": "openapi.2026-01-29.edison.json",
+      "operations": [
+        {
+          "key": "get-customers",
+          "method": "get",
+          "path": "/customers",
+          "summary": "Get all customers",
+          "tags": [
+            "Customers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-customers-by-id",
+          "method": "get",
+          "path": "/customers/{id}",
+          "summary": "Get a customer",
+          "tags": [
+            "Customers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-events-by-id",
+          "method": "get",
+          "path": "/events/{id}",
+          "summary": "Get an event",
+          "tags": [
+            "Events"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-grid-fee-reductions",
+          "method": "get",
+          "path": "/grid-fee-reductions",
+          "summary": "Get all grid reductions",
+          "tags": [
+            "Grid Fee Reductions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-grid-fee-reductions-by-id",
+          "method": "get",
+          "path": "/grid-fee-reductions/{id}",
+          "summary": "Get a grid reduction",
+          "tags": [
+            "Grid Fee Reductions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-invoices-by-id",
+          "method": "get",
+          "path": "/invoices/{id}",
+          "summary": "Get an invoice",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-invoices-by-id-file",
+          "method": "get",
+          "path": "/invoices/{id}/file",
+          "summary": "Get an invoice PDF file",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-leads",
+          "method": "get",
+          "path": "/leads",
+          "summary": "Get all leads",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-leads-by-id",
+          "method": "get",
+          "path": "/leads/{id}",
+          "summary": "Get a lead",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-meter-orders",
+          "method": "get",
+          "path": "/meter-orders",
+          "summary": "Get all meter orders",
+          "tags": [
+            "Meter Orders"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-meter-orders-by-id",
+          "method": "get",
+          "path": "/meter-orders/{id}",
+          "summary": "Get a meter order",
+          "tags": [
+            "Meter Orders"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-oauth-authorize",
+          "method": "get",
+          "path": "/oauth/authorize",
+          "summary": "Authorize",
+          "tags": [
+            "OAuth"
+          ],
+          "security": [
+            "none"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-plans",
+          "method": "get",
+          "path": "/plans",
+          "summary": "Get all plans",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-plans-by-id",
+          "method": "get",
+          "path": "/plans/{id}",
+          "summary": "Get a plan",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-plans-by-id-quote",
+          "method": "get",
+          "path": "/plans/{id}/quote",
+          "summary": "Get a quote",
+          "tags": [
+            "Plans"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions",
+          "method": "get",
+          "path": "/subscriptions",
+          "summary": "Get all subscriptions",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions-by-id",
+          "method": "get",
+          "path": "/subscriptions/{id}",
+          "summary": "Get a subscription",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions-by-id-consumption",
+          "method": "get",
+          "path": "/subscriptions/{id}/consumption",
+          "summary": "Get consumption data",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions-by-id-invoices",
+          "method": "get",
+          "path": "/subscriptions/{id}/invoices",
+          "summary": "Get all invoices for a subscription",
+          "tags": [
+            "Invoices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions-by-id-meter-readings",
+          "method": "get",
+          "path": "/subscriptions/{id}/meter_readings",
+          "summary": "Get all meter readings",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-subscriptions-by-id-prices",
+          "method": "get",
+          "path": "/subscriptions/{id}/prices",
+          "summary": "Retrieve Price Time Series",
+          "tags": [
+            "Prices"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-suppliers",
+          "method": "get",
+          "path": "/suppliers",
+          "summary": "Get all suppliers",
+          "tags": [
+            "Suppliers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-suppliers-search",
+          "method": "get",
+          "path": "/suppliers/search",
+          "summary": "Search for supplier",
+          "tags": [
+            "Suppliers"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "get-well-known-oauth-authorization-server",
+          "method": "get",
+          "path": "/.well-known/oauth-authorization-server",
+          "summary": "OAuth 2.0 Authorization Server Metadata",
+          "tags": [
+            "OAuth",
+            "Discovery"
+          ],
+          "security": [
+            "none"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-admin-magic-link",
+          "method": "post",
+          "path": "/admin/magic_link",
+          "summary": "Get a magic link for the customer portal",
+          "tags": [
+            "Admin"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-grid-fee-reductions",
+          "method": "post",
+          "path": "/grid-fee-reductions",
+          "summary": "Create a grid fee reduction",
+          "tags": [
+            "Grid Fee Reductions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-leads",
+          "method": "post",
+          "path": "/leads",
+          "summary": "Create a lead",
+          "tags": [
+            "Leads"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-load-forecasts",
+          "method": "post",
+          "path": "/load-forecasts",
+          "summary": "Transmit a load forecast",
+          "tags": [
+            "Procurement"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-meter-orders",
+          "method": "post",
+          "path": "/meter-orders",
+          "summary": "Create a meter order",
+          "tags": [
+            "Meter Orders"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-oauth-token",
+          "method": "post",
+          "path": "/oauth/token",
+          "summary": "Get a token",
+          "tags": [
+            "OAuth"
+          ],
+          "security": [
+            "basic"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-subscriptions",
+          "method": "post",
+          "path": "/subscriptions",
+          "summary": "Create a subscription",
+          "tags": [
+            "Subscriptions"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        },
+        {
+          "key": "post-subscriptions-by-id-meter-readings",
+          "method": "post",
+          "path": "/subscriptions/{id}/meter_readings",
+          "summary": "Submit a meter reading",
+          "tags": [
+            "Consumption"
+          ],
+          "security": [
+            "bearer"
+          ],
+          "specVersion": "2026-01-29.edison"
+        }
+      ]
+    }
+  }
+}

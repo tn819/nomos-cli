@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "bun test",
+    "test:unit": "bun test tests/unit",
+    "test:e2e": "bun test tests/e2e",
+    "test:integration": "bun test tests/integration",
+    "test:shell": "./tests/e2e/shell-tests.sh",
+    "test:all": "bun run build && bun test && bun run test:shell",
+    "test:api": "bun test tests/integration/api.test.ts",
     "build": "bun build src/cli.ts --outfile dist/cli.js --target node --shebang",
     "dev": "bun src/cli.ts",
     "capabilities": "bun src/cli.ts capabilities",
@@ -23,6 +29,7 @@
     "commander": "^14.0.3"
   },
   "devDependencies": {
+    "@types/bun": "^1.3.11",
     "@types/node": "^25.5.0",
     "typescript": "^5.9.3"
   },

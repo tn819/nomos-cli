@@ -8,24 +8,26 @@ const RESET = "\x1b[0m";
 
 export function getAsciiLogo(): string {
   return `
-${PURPLE}███╗   ███╗${RESET} ██████╗  ██████╗ ██████╗  ██████╗
-${PURPLE}████╗ ████║${RESET} ██╔════╝ ██╔════╝██╔═══██╗██╔════╝
-${PURPLE}██╔████╔██║${RESET} ██║      ██║     ██║   ██║██║     
-${PURPLE}██║╚██╔╝██║${RESET} ██║      ██║     ██║   ██║██║     
-${PURPLE}██║ ╚═╝ ██║${RESET} ╚██████╗╚██████╗╚██████╔╝╚██████╗
-${PURPLE}╚═╝     ╚═╝${RESET}  ╚══════╝ ╚══════╝ ╚═════╝  ╚══════╝
+${PURPLE}   ╱       █       ╲${RESET}
 
-${PURPLE}Nomos SDK + CLI${RESET}
+${PURPLE}  ╱        █        ╲${RESET}    ${PURPLE}NOMOS${RESET} ${GRAY}CLI${RESET}
+
+${PURPLE} ╱         █         ╲${RESET}   ${MUTED}Command-line interface${RESET}
+${PURPLE}█          █          █${RESET}   ${MUTED}for the Nomos Energy API${RESET}
+${PURPLE}█          █          █${RESET}   
+${PURPLE}█          █          █${RESET}   ${GRAY}nomos.energy${RESET}
+${PURPLE}█          █          █${RESET}   
+
 `;
 }
 
 export function getSmallLogo(): string {
-  return `${PURPLE}▟▙${RESET} Nomos`;
+  return `${PURPLE}N${RESET} Nomos`;
 }
 
 export function getFullBanner(version: string): string {
   return `${getAsciiLogo()}
-${MUTED}Version: ${PURPLE}${version}${RESET}
+${MUTED}v${PURPLE}${version}${RESET}
 `;
 }
 

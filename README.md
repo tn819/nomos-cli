@@ -60,7 +60,7 @@ nomos login --client-id "$NOMOS_CLIENT_ID" --client-secret "$NOMOS_CLIENT_SECRET
 ```bash
 nomos call get-plans
 nomos call get-plans-by-id-quote --path '{"id":"plan_123"}' --query '{"annualConsumption":4500}'
-nomos call post-subscriptions --body '{"planId":"plan_123","customer":{"email":"test@example.com"}}'
+nomos call post-subscriptions --set planId=plan_123 --set customer.email=test@example.com
 ```
 
 ### Invoice & Consumption
@@ -76,7 +76,7 @@ nomos call get-subscriptions-by-id-consumption --path '{"id":"sub_123"}'
 ```bash
 nomos meter-orders list
 nomos meter-orders get --id mo_123
-nomos meter-orders create --body '{"subscriptionId":"sub_123"}'
+nomos meter-orders create --set subscriptionId=sub_123
 ```
 
 ---

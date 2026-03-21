@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Command } from "commander";
+import { Command, InvalidOptionArgumentError } from "commander";
 import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -16,6 +16,27 @@ function parseJsonObject(value: string | undefined): Record<string, unknown> | u
     throw new Error("Expected a JSON object");
   }
   return parsed as Record<string, unknown>;
+}
+
+function parseSetValue(value: string, previous: Record<string, unknown> | undefined): Record<string, unknown> {
+  const idx = value.indexOf("=");
+  if (idx < 0) {
+    throw new InvalidOptionArgumentError("--set expects key=value format");
+  }
+  const key = value.slice(0, idx);
+  let val: string | number | boolean = value.slice(idx + 1);
+  // Auto-convert types
+  if (val === "true") val = true;
+  else if (val === "false") val = false;
+  else if (/^-?\d+(\.\d+)?$/.test(val)) val = parseFloat(val);
+  return { ...previous, [key]: val };
+}
+
+function buildBody(opts: { body?: string; set?: Record<string, unknown> }): Record<string, unknown> | undefined {
+  const jsonBody = parseJsonObject(opts.body);
+  const setBody = opts.set;
+  if (!jsonBody && !setBody) return undefined;
+  return { ...jsonBody, ...setBody };
 }
 
 type StoredConfig = {
@@ -315,13 +336,14 @@ program
   .option("--path <json>", "Path params JSON object")
   .option("--query <json>", "Query params JSON object")
   .option("--body <json>", "Body JSON object")
+  .option("--set <key=value>", "Body param (repeatable)", parseSetValue, undefined)
   .option("--auth <auth>", "Auth mode: bearer|basic|none")
   .action(async (operation, opts) => {
     const sdk = sdkFromOptions(opts);
     const result = await sdk.call(operation, {
       path: parseJsonObject(opts.path) as Record<string, string | number> | undefined,
       query: parseJsonObject(opts.query) as Record<string, string | number | boolean | Array<string | number | boolean>> | undefined,
-      body: parseJsonObject(opts.body),
+      body: buildBody(opts),
       auth: opts.auth,
     });
     printResponse(result);
@@ -398,7 +420,7 @@ gridFeeReductions
 gridFeeReductions
   .command("create")
   .description("POST /grid-fee-reductions")
-  .requiredOption("--body <json>", "Body JSON object")
+  .option("--set <key=value>", "Body param (repeatable)", parseSetValue, undefined)
   .option("--version <version>", "Spec version", getLatestVersion())
   .option("--base-url <url>", "Base API URL")
   .option("--token <token>", "Bearer token")
@@ -406,7 +428,7 @@ gridFeeReductions
   .action(async (opts) => {
     const sdk = sdkFromOptions(opts);
     const result = await sdk.call("post-grid-fee-reductions", {
-      body: parseJsonObject(opts.body),
+      body: opts.set,
     });
     printResponse(result);
   });
@@ -450,7 +472,7 @@ meterOrders
 meterOrders
   .command("create")
   .description("POST /meter-orders")
-  .requiredOption("--body <json>", "Body JSON object")
+  .option("--set <key=value>", "Body param (repeatable)", parseSetValue, undefined)
   .option("--version <version>", "Spec version", getLatestVersion())
   .option("--base-url <url>", "Base API URL")
   .option("--token <token>", "Bearer token")
@@ -458,7 +480,7 @@ meterOrders
   .action(async (opts) => {
     const sdk = sdkFromOptions(opts);
     const result = await sdk.call("post-meter-orders", {
-      body: parseJsonObject(opts.body),
+      body: opts.set,
     });
     printResponse(result);
   });

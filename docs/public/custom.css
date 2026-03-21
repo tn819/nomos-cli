@@ -1,0 +1,72 @@
+/* Hide the extra menu dropdown */
+.VPNavBarExtra,
+.VPNavBarHamburger,
+.VPFlyout.VPNavBarExtra {
+  display: none !important;
+}
+
+/* Hide mobile screen menu */
+.VPNavScreen {
+  display: none !important;
+}
+
+/* Force appearance toggle to be visible */
+.VPNavBarAppearance {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Force social links to be visible */
+.VPNavBarSocialLinks {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Keep visible on mobile too */
+@media (max-width: 768px) {
+  .VPNavBarAppearance,
+  .VPNavBarSocialLinks {
+    display: flex !important;
+  }
+}
+
+/* Logo should adapt to theme */
+.VPNavBarTitle .logo {
+  fill: currentColor;
+}
+
+/* Dark mode logo styling */
+.dark .VPNavBarTitle img {
+  filter: brightness(0) invert(1);
+}
+
+/* Ensure nav content stays on one line */
+.VPNavBarContent {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Hide the "..." menu button completely */
+.VPNavBarExtra {
+  display: none !important;
+}
+
+/* Show all nav items inline */
+.VPNavBarMenu {
+  display: flex !important;
+}
+
+.VPNavBarMenuGroup {
+  display: flex !important;
+}
+
+/* Ensure appearance and social are always visible */
+.VPNavBarAppearance {
+  display: flex !important;
+  margin-left: 8px !important;
+}
+
+.VPNavBarSocialLinks {
+  display: flex !important;
+  margin-left: 8px !important;
+}

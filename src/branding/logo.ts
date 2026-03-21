@@ -5,11 +5,14 @@ const RESET = "\x1b[0m";
 
 export function getAsciiLogo(): string {
   return `
-${PURPLE} ┃${RESET}   ${PURPLE}┃${RESET}    ${GRAY}NOMOS${RESET}
-${PURPLE} ┃${RESET}${PURPLE}╲${RESET}  ${PURPLE}┃${RESET}  
-${PURPLE} ┃${RESET} ${PURPLE}╲${RESET} ${PURPLE}┃${RESET}    ${MUTED}CLI for Nomos Energy API${RESET}
-${PURPLE} ┃${RESET}  ${PURPLE}╲${RESET}${PURPLE}┃${RESET}  
-${PURPLE} ┃${RESET}   ${PURPLE}╲${RESET}    ${MUTED}nomos.energy${RESET}
+${PURPLE}╲       │       ╱${RESET}    ${GRAY}NOMOS${RESET}
+${PURPLE} ╲      │      ╱${RESET}    
+${PURPLE}  ╲     │     ╱${RESET}     ${MUTED}CLI for Nomos Energy API${RESET}
+${PURPLE}   ╲    │    ╱${RESET}     
+${PURPLE}    ╲   │   ╱${RESET}      
+${PURPLE}     ╲  │  ╱${RESET}       ${MUTED}nomos.energy${RESET}
+${PURPLE}      ╲ │ ╱${RESET}        
+${PURPLE}       ╲│╱${RESET}         
 ${RESET}
 `;
 }

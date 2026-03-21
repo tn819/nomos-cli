@@ -6,7 +6,7 @@ const gray = chalk.hex(hex.gray40);
 const muted = chalk.hex(hex.muted);
 
 export function getAsciiLogo(): string {
-  const nSymbol = purple("╱│╲");
+  const nSymbol = purple("/|/");
   const wordmark = gray("NOMOS");
   const subtitle = muted("CLI for Nomos Energy API · nomos.energy");
   

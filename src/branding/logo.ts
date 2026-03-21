@@ -1,34 +1,41 @@
-const PURPLE = "\x1b[38;5;99m";
-const GRAY = "\x1b[38;5;246m";
-const MUTED = "\x1b[38;5;243m";
-const RESET = "\x1b[0m";
+import chalk from "chalk";
+import { hex } from "./theme.js";
+
+const purple = chalk.hex(hex.primary);
+const gray = chalk.hex(hex.gray40);
+const muted = chalk.hex(hex.muted);
 
 export function getAsciiLogo(): string {
-  return `
-${PURPLE}╲       │       ╱${RESET}    ${GRAY}NOMOS${RESET}
-${PURPLE} ╲      │      ╱${RESET}    
-${PURPLE}  ╲     │     ╱${RESET}     ${MUTED}CLI for Nomos Energy API${RESET}
-${PURPLE}   ╲    │    ╱${RESET}     
-${PURPLE}    ╲   │   ╱${RESET}      
-${PURPLE}     ╲  │  ╱${RESET}       ${MUTED}nomos.energy${RESET}
-${PURPLE}      ╲ │ ╱${RESET}        
-${PURPLE}       ╲│╱${RESET}         
-${RESET}
-`;
+  const line1 = purple("╱       │       ╲") + "    " + gray("NOMOS");
+  const line2 = purple(" ╱       │       ╲");
+  const line3 = purple("  ╱      │      ╲") + "     " + muted("CLI for Nomos Energy API");
+  const line4 = purple("   ╱     │     ╲");
+  const line5 = purple("    ╱    │    ╲");
+  const line6 = purple("     ╱   │   ╲") + "       " + muted("nomos.energy");
+  const line7 = purple("      ╱  │  ╲");
+  const line8 = purple("       ╱│╲");
+  
+  return [line1, line2, line3, line4, line5, line6, line7, line8, ""].join("\n");
 }
 
 export function getSmallLogo(): string {
-  return `${PURPLE}NOMOS${RESET}`;
+  return purple("NOMOS");
 }
 
 export function getFullBanner(version: string): string {
-  return `${getAsciiLogo()}
-${MUTED}v${PURPLE}${version}${RESET}
-`;
+  return getAsciiLogo() + "\n" + muted("v") + purple(version) + "\n";
 }
 
 export function getWordmark(): string {
-  return `${PURPLE}Nomos${RESET}`;
+  return purple("Nomos");
 }
 
-export const ansi = { PURPLE, GRAY, MUTED, RESET };
+export const ansi = { 
+  PURPLE: purple, 
+  GRAY: gray, 
+  MUTED: muted, 
+  RESET: chalk.reset,
+  GREEN: chalk.hex(hex.success),
+  RED: chalk.hex(hex.error),
+  GRAY_BRIGHT: chalk.hex(hex.gray80)
+};

@@ -2,12 +2,18 @@ import boxen from "boxen";
 import Table from "cli-table3";
 import { ansi } from "./logo.js";
 
+const HEX_SUCCESS = "#22c55e";
+const HEX_ERROR = "#ef4444";
+const HEX_INFO = "#3b82f6";
+const HEX_WARNING = "#f59e0b";
+const HEX_PRIMARY = "#7c5cff";
+
 export function successBox(message: string, title?: string): string {
   return boxen(message, {
     padding: 1,
     margin: 1,
     borderStyle: "round",
-    borderColor: "green",
+    borderColor: HEX_SUCCESS,
     title: title || "✓ Success",
     titleAlignment: "center",
   });
@@ -18,7 +24,7 @@ export function errorBox(message: string, title?: string): string {
     padding: 1,
     margin: 1,
     borderStyle: "round",
-    borderColor: "red",
+    borderColor: HEX_ERROR,
     title: title || "✗ Error",
     titleAlignment: "center",
   });
@@ -29,7 +35,7 @@ export function infoBox(message: string, title?: string): string {
     padding: 1,
     margin: 1,
     borderStyle: "round",
-    borderColor: "blue",
+    borderColor: HEX_INFO,
     title: title || "ℹ Info",
     titleAlignment: "center",
   });
@@ -40,7 +46,7 @@ export function warningBox(message: string, title?: string): string {
     padding: 1,
     margin: 1,
     borderStyle: "round",
-    borderColor: "yellow",
+    borderColor: HEX_WARNING,
     title: title || "⚠ Warning",
     titleAlignment: "center",
   });
@@ -48,9 +54,8 @@ export function warningBox(message: string, title?: string): string {
 
 export function createTable(headers: string[]): Table.Table {
   return new Table({
-    head: headers,
+    head: headers.map((h) => `${ansi.PURPLE}${h}${ansi.RESET}`),
     style: {
-      head: ["magenta"],
       border: ["gray"],
       compact: true,
     },

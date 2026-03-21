@@ -2,6 +2,7 @@
  * Spinner utilities using ora
  */
 import ora, { type Ora } from "ora";
+import { hex } from "./theme.js";
 
 /**
  * Create a spinner with Nomos branding
@@ -9,7 +10,7 @@ import ora, { type Ora } from "ora";
 export function createSpinner(text: string): Ora {
   return ora({
     text,
-    color: "magenta",
+    color: hex.primary as unknown as "magenta",
     spinner: "dots",
   });
 }

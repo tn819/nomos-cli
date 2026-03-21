@@ -25,12 +25,12 @@ export function getWordmark(): string {
   return purple("Nomos");
 }
 
-export const ansi = { 
-  PURPLE: purple, 
-  GRAY: gray, 
-  MUTED: muted, 
-  RESET: chalk.reset,
-  GREEN: chalk.hex(hex.success),
-  RED: chalk.hex(hex.error),
-  GRAY_BRIGHT: chalk.hex(hex.gray80)
+export const ansi = {
+  PURPLE: `\x1b[38;5;99m`,
+  GRAY: `\x1b[38;5;246m`,
+  MUTED: `\x1b[38;5;243m`,
+  RESET: `\x1b[0m`,
+  GREEN: `\x1b[38;5;34m`,
+  RED: `\x1b[38;5;1m`,
+  GRAY_BRIGHT: `\x1b[38;5;239m`,
 };

@@ -1,6 +1,14 @@
 import boxen from "boxen";
 import Table from "cli-table3";
-import { ansi } from "./logo.js";
+import chalk from "chalk";
+import { hex } from "./theme.js";
+
+const purple = chalk.hex(hex.primary);
+const gray = chalk.hex(hex.gray40);
+const muted = chalk.hex(hex.muted);
+const cyan = chalk.hex("#3b82f6");
+const green = chalk.hex(hex.success);
+const red = chalk.hex(hex.error);
 
 const HEX_SUCCESS = "#22c55e";
 const HEX_ERROR = "#ef4444";
@@ -54,7 +62,7 @@ export function warningBox(message: string, title?: string): string {
 
 export function createTable(headers: string[]): Table.Table {
   return new Table({
-    head: headers.map((h) => `${ansi.PURPLE}${h}${ansi.RESET}`),
+    head: headers.map((h) => purple(h)),
     style: {
       border: ["gray"],
       compact: true,
@@ -63,14 +71,24 @@ export function createTable(headers: string[]): Table.Table {
 }
 
 export function formatKeyValue(key: string, value: string): string {
-  return `${ansi.PURPLE}${key}:${ansi.RESET} ${value}`;
+  return `${purple(key)}: ${value}`;
 }
 
 export function formatHeader(text: string): string {
-  return `\n${ansi.PURPLE}▸${ansi.RESET} ${ansi.GRAY_BRIGHT}${text}${ansi.RESET}\n`;
+  return `\n${purple("▸")} ${chalk.dim(text)}\n`;
 }
 
 export function formatBullet(text: string, indent = 0): string {
   const spaces = " ".repeat(indent);
-  return `${spaces}${ansi.GRAY}•${ansi.RESET} ${text}`;
+  return `${spaces}${gray("•")} ${text}`;
 }
+
+export const ansi = {
+  PURPLE: purple,
+  GRAY: gray,
+  MUTED: muted,
+  RESET: chalk.reset,
+  GREEN: green,
+  RED: red,
+  GRAY_BRIGHT: chalk.hex(hex.gray80),
+};

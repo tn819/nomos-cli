@@ -116,3 +116,9 @@ storybook-static
 
 # Sisyphus
 .sisyphus/
+
+# VitePress cache
+docs/.vitepress/cache/
+
+# VitePress build output
+docs-dist/

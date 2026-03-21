@@ -6,16 +6,11 @@ const gray = chalk.hex(hex.gray40);
 const muted = chalk.hex(hex.muted);
 
 export function getAsciiLogo(): string {
-  const line1 = purple("╱       │       ╲") + "    " + gray("NOMOS");
-  const line2 = purple(" ╱       │       ╲");
-  const line3 = purple("  ╱      │      ╲") + "     " + muted("CLI for Nomos Energy API");
-  const line4 = purple("   ╱     │     ╲");
-  const line5 = purple("    ╱    │    ╲");
-  const line6 = purple("     ╱   │   ╲") + "       " + muted("nomos.energy");
-  const line7 = purple("      ╱  │  ╲");
-  const line8 = purple("       ╱│╲");
+  const nSymbol = purple("╱│╲");
+  const wordmark = gray("NOMOS");
+  const subtitle = muted("CLI for Nomos Energy API · nomos.energy");
   
-  return [line1, line2, line3, line4, line5, line6, line7, line8, ""].join("\n");
+  return `${nSymbol} ${wordmark}\n  ${subtitle}\n`;
 }
 
 export function getSmallLogo(): string {

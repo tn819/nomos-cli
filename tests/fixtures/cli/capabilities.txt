@@ -1,0 +1,95 @@
+
+▸ Spec Version: 2026-01-29.edison
+
+Total operations: 32
+
+
+▸ Admin
+
+• post-admin-magic-link :: POST /admin/magic_link
+
+▸ Consumption
+
+• get-subscriptions-by-id-consumption :: GET /subscriptions/{id}/consumption
+• get-subscriptions-by-id-meter-readings :: GET /subscriptions/{id}/meter_readings
+• post-subscriptions-by-id-meter-readings :: POST /subscriptions/{id}/meter_readings
+
+▸ Customers
+
+• get-customers :: GET /customers
+• get-customers-by-id :: GET /customers/{id}
+
+▸ Discovery
+
+• get-well-known-oauth-authorization-server :: GET /.well-known/oauth-authorization-server
+
+▸ Events
+
+• get-events-by-id :: GET /events/{id}
+
+▸ Grid Fee Reductions
+
+• get-grid-fee-reductions :: GET /grid-fee-reductions
+• get-grid-fee-reductions-by-id :: GET /grid-fee-reductions/{id}
+• post-grid-fee-reductions :: POST /grid-fee-reductions
+
+▸ Invoices
+
+• get-invoices-by-id :: GET /invoices/{id}
+• get-invoices-by-id-file :: GET /invoices/{id}/file
+• get-subscriptions-by-id-invoices :: GET /subscriptions/{id}/invoices
+
+▸ Leads
+
+• get-leads :: GET /leads
+• get-leads-by-id :: GET /leads/{id}
+• post-leads :: POST /leads
+
+▸ Meter Orders
+
+• get-meter-orders :: GET /meter-orders
+• get-meter-orders-by-id :: GET /meter-orders/{id}
+• post-meter-orders :: POST /meter-orders
+
+▸ OAuth
+
+• get-oauth-authorize :: GET /oauth/authorize
+• get-well-known-oauth-authorization-server :: GET /.well-known/oauth-authorization-server
+• post-oauth-token :: POST /oauth/token
+
+▸ Plans
+
+• get-plans :: GET /plans
+• get-plans-by-id :: GET /plans/{id}
+• get-plans-by-id-quote :: GET /plans/{id}/quote
+
+▸ Prices
+
+• get-subscriptions-by-id-prices :: GET /subscriptions/{id}/prices
+
+▸ Procurement
+
+• post-load-forecasts :: POST /load-forecasts
+
+▸ Subscriptions
+
+• get-subscriptions :: GET /subscriptions
+• get-subscriptions-by-id :: GET /subscriptions/{id}
+• post-subscriptions :: POST /subscriptions
+
+▸ Suppliers
+
+• get-suppliers :: GET /suppliers
+• get-suppliers-search :: GET /suppliers/search
+
+▸ Version Diff: 2025-12-16.batman → 2026-01-29.edison
+
+Added (6):
+  + get-grid-fee-reductions :: GET /grid-fee-reductions
+  + get-grid-fee-reductions-by-id :: GET /grid-fee-reductions/{id}
+  + get-meter-orders :: GET /meter-orders
+  + get-meter-orders-by-id :: GET /meter-orders/{id}
+  + post-grid-fee-reductions :: POST /grid-fee-reductions
+  + post-meter-orders :: POST /meter-orders
+
+Removed (0):

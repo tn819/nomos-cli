@@ -1,0 +1,15 @@
+Usage: nomos oauth-token [options]
+
+Convenience helper for POST /oauth/token
+
+Options:
+  --client-id <id>                OAuth client id
+  --client-secret <secret>        OAuth client secret
+  --grant-type <grantType>        authorization_code|refresh_token|client_credentials
+  --code <code>                   Authorization code
+  --refresh-token <token>         Refresh token
+  --scope <scope>                 Scopes (space separated)
+  --code-verifier <codeVerifier>  PKCE code verifier
+  --version <version>             Spec version (default: "2026-01-29.edison")
+  --base-url <url>                Base API URL
+  -h, --help                      display help for command

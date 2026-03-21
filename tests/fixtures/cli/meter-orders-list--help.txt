@@ -1,0 +1,11 @@
+Usage: nomos meter-orders list [options]
+
+GET /meter-orders
+
+Options:
+  --version <version>          Spec version (default: "2026-01-29.edison")
+  --base-url <url>             Base API URL
+  --token <token>              Bearer token
+  --basic <username:password>  Basic credentials
+  --query <json>               Query params JSON object
+  -h, --help                   display help for command

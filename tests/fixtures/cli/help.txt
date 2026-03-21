@@ -1,0 +1,44 @@
+
+
+          ---- ---           ----       ---    ---    ------    .----    ----    ------     .-----.
+        ----- .---         -----        ----   ---  ----------  -----   -----  ----------  ---------
+      ----.-  .---       ----..         -.---- --- ----     --- ---.-.  --.-- --..     --- ---..  .
+    ---.-.    .---     ---.-.           ----.--.-- .-.      ------..-- --.--- --.      --.---------.
+  -----.      .--.   -----.             --- .--.-- .---     --.---- --.-- --. .--.     ---     .----
+----.-        .--- ----.-               -.-   ----  ----------. ---  ---- ---  --------.- .---------
+--.-           --- --.-                 ---    --.    .-.---.   .-.  --.  ---    ------     -----..
+  ⚡  CLI for Nomos Energy API  ·  nomos.energy
+
+  ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+  › nomos login               save credentials for future calls
+  › nomos capabilities        browse all available API endpoints
+  › nomos call <operation>    call any endpoint by operation key
+  › nomos operations          list all operation keys
+  ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+Usage: nomos [options] [command]
+
+Nomos Energy SDK CLI
+
+Options:
+  -V, --version               output the version number
+  -h, --help                  display help for command
+
+Commands:
+  help                        Display help
+  login [options]             Login and persist auth defaults for future nomos
+                              commands
+  versions                    List available OpenAPI versions
+  capabilities [options]      Show grouped operation overview and version diff
+  everything [options]        Display the full endpoint overview (same as
+                              capabilities)
+  new-endpoints               Show endpoints that are new in the latest spec
+                              compared to the earliest available spec
+  operations [options]        List operation keys
+  call [options] <operation>  Call an operation by key
+  oauth-token [options]       Convenience helper for POST /oauth/token
+  grid-fee-reductions         Edison grid fee reductions endpoints
+  meter-orders                Edison meter orders endpoints
+
+• Run nomos <command> --help for command details
+

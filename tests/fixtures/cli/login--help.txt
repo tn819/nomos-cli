@@ -1,0 +1,10 @@
+Usage: nomos login [options]
+
+Login and persist auth defaults for future nomos commands
+
+Options:
+  --token <token>           Bearer token
+  --client-id <id>          OAuth client id
+  --client-secret <secret>  OAuth client secret
+  --scope <scope>           OAuth scope string
+  -h, --help                display help for command

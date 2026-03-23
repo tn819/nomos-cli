@@ -1,0 +1,12 @@
+Usage: nomos meter-orders [options] [command]
+
+Edison meter orders endpoints
+
+Options:
+  -h, --help        display help for command
+
+Commands:
+  list [options]    GET /meter-orders
+  get [options]     GET /meter-orders/{id}
+  create [options]  POST /meter-orders
+  help [command]    display help for command

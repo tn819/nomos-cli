@@ -1,0 +1,12 @@
+Usage: nomos grid-fee-reductions [options] [command]
+
+Edison grid fee reductions endpoints
+
+Options:
+  -h, --help        display help for command
+
+Commands:
+  list [options]    GET /grid-fee-reductions
+  get [options]     GET /grid-fee-reductions/{id}
+  create [options]  POST /grid-fee-reductions
+  help [command]    display help for command

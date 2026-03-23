@@ -4,7 +4,7 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "n
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
-import { getAsciiLogo, ansi } from "./branding/logo.js";
+import { getAsciiLogo, getWelcomeTips, ansi, brand } from "./branding/logo.js";
 import { successBox, errorBox, formatHeader, formatBullet } from "./branding/output.js";
 import { getAvailableVersions, getLatestVersion, getOperations, getVersionDiff, groupOperationsByTag } from "./overview.js";
 import { NomosSDK } from "./sdk.js";
@@ -152,8 +152,8 @@ program
   .description("Nomos Energy SDK CLI")
   .version("0.1.0")
   .showHelpAfterError()
-  .addHelpText("before", "\n" + getAsciiLogo())
-  .addHelpText("after", "\n" + formatBullet("Use 'nomos <command> --help' for more info") + "\n");
+  .addHelpText("before", "\n" + getAsciiLogo() + getWelcomeTips())
+  .addHelpText("after", "\n" + formatBullet(`Run ${brand("nomos")} ${ansi.GRAY}<command>${ansi.RESET} ${ansi.MUTED}--help${ansi.RESET} for command details`) + "\n");
 
 program
   .command("help")
@@ -486,7 +486,6 @@ meterOrders
   });
 
 if (process.argv.length <= 2) {
-  console.log(getAsciiLogo());
   program.outputHelp();
   process.exit(0);
 }

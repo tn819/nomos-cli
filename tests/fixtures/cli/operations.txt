@@ -1,0 +1,35 @@
+
+▸ Operations (32)
+
+• get-customers	GET	/customers
+• get-customers-by-id	GET	/customers/{id}
+• get-events-by-id	GET	/events/{id}
+• get-grid-fee-reductions	GET	/grid-fee-reductions
+• get-grid-fee-reductions-by-id	GET	/grid-fee-reductions/{id}
+• get-invoices-by-id	GET	/invoices/{id}
+• get-invoices-by-id-file	GET	/invoices/{id}/file
+• get-leads	GET	/leads
+• get-leads-by-id	GET	/leads/{id}
+• get-meter-orders	GET	/meter-orders
+• get-meter-orders-by-id	GET	/meter-orders/{id}
+• get-oauth-authorize	GET	/oauth/authorize
+• get-plans	GET	/plans
+• get-plans-by-id	GET	/plans/{id}
+• get-plans-by-id-quote	GET	/plans/{id}/quote
+• get-subscriptions	GET	/subscriptions
+• get-subscriptions-by-id	GET	/subscriptions/{id}
+• get-subscriptions-by-id-consumption	GET	/subscriptions/{id}/consumption
+• get-subscriptions-by-id-invoices	GET	/subscriptions/{id}/invoices
+• get-subscriptions-by-id-meter-readings	GET	/subscriptions/{id}/meter_readings
+• get-subscriptions-by-id-prices	GET	/subscriptions/{id}/prices
+• get-suppliers	GET	/suppliers
+• get-suppliers-search	GET	/suppliers/search
+• get-well-known-oauth-authorization-server	GET	/.well-known/oauth-authorization-server
+• post-admin-magic-link	POST	/admin/magic_link
+• post-grid-fee-reductions	POST	/grid-fee-reductions
+• post-leads	POST	/leads
+• post-load-forecasts	POST	/load-forecasts
+• post-meter-orders	POST	/meter-orders
+• post-oauth-token	POST	/oauth/token
+• post-subscriptions	POST	/subscriptions
+• post-subscriptions-by-id-meter-readings	POST	/subscriptions/{id}/meter_readings

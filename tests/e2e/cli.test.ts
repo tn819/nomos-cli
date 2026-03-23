@@ -28,7 +28,7 @@ describe("CLI E2E", () => {
 
   test("should show capabilities", async () => {
     const result = await $`bun ${CLI_PATH} capabilities`.text();
-    expect(result).toContain("Spec version:");
+    expect(result).toContain("Spec Version:");
     expect(result).toContain("Total operations:");
   });
 
@@ -41,7 +41,7 @@ describe("CLI E2E", () => {
 
   test("should show everything command", async () => {
     const result = await $`bun ${CLI_PATH} everything`.text();
-    expect(result).toContain("Spec version:");
+    expect(result).toContain("Spec Version:");
     expect(result).toContain("Total operations:");
   });
 
